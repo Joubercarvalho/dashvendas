@@ -1,6 +1,7 @@
 from dash import Dash, html, dcc, Input, Output
 import plotly.express as px
 import pandas as pd
+import openpyxl as op
 
 
 app = Dash()
@@ -15,6 +16,10 @@ fig = px.bar(df, x="Produto", y="Quantidade", color="Loja", barmode="group")
 #cria a opção de loja
 opcoes = list(df['Loja'].unique())
 opcoes.append("Todas")
+
+#cria a opção produtos
+opcoes_produtos = list(df['Produto'].unique())
+opcoes_produtos.append("Todos")
 
 app.layout = html.Div(children=[
     html.H1(children='relatório de vendas'),
@@ -43,4 +48,4 @@ def update_output(value):
     return fig
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
